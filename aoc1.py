@@ -1,24 +1,9 @@
 import re
 
-def change(word, sequence):
-    if word == "one":
-        sequence = sequence.replace(word, "1")
-    if word == "two":
-        sequence = sequence.replace(word, "2")
-    if word == "three":
-        sequence = sequence.replace(word, "3")
-    if word == "four":
-        sequence = sequence.replace(word, "4")
-    if word == "five":
-        sequence = sequence.replace(word, "5")
-    if word == "six":
-        sequence = sequence.replace(word, "6")
-    if word == "seven":
-        sequence = sequence.replace(word, "7")
-    if word == "eight":
-        sequence = sequence.replace(word, "8")
-    if word == "nine":
-        sequence = sequence.replace(word, "9")
+def change(word, sequence, numbers_as_string):
+    for number in numbers_as_string:
+        if word == number:
+            sequence = sequence.replace(word, str(numbers_as_string.index(number)+1))
     return sequence
 
 def main():
@@ -27,13 +12,10 @@ def main():
 
     with open("aoc1input.txt", "r") as file:
         for line in file:
-            print(line)
             numbers = (''.join(re.findall(r"(?=(\d|one|two|three|four|five|six|seven|eight|nine))", line)))
-            print(numbers)
 
             for number in numbers_as_string:
-                numbers = change(number,numbers)
-            print(numbers)
+                numbers = change(number,numbers, numbers_as_string)
 
             concated_numbers = [letter for letter in numbers]
 
